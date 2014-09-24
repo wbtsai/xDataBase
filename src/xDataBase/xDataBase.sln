@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Release", "Release", "{59CEC342-BE57-43F8-9E9F-20C4F45A13E6}"
+	ProjectSection(SolutionItems) = preProject
+		Release.txt = Release.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuanta.xCommon", "Yuanta.xCommon\Yuanta.xCommon.csproj", "{E546DA21-2325-474A-9FFA-C6FFE09C3B69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yuanta.xDataBase", "Yuanta.xDataBase\Yuanta.xDataBase.csproj", "{3A9F3164-C912-476C-8010-802C1AD05DA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPP", "TestPP\TestPP.csproj", "{A0456096-B90B-4CB8-A574-FD301D114479}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E546DA21-2325-474A-9FFA-C6FFE09C3B69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E546DA21-2325-474A-9FFA-C6FFE09C3B69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E546DA21-2325-474A-9FFA-C6FFE09C3B69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E546DA21-2325-474A-9FFA-C6FFE09C3B69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A9F3164-C912-476C-8010-802C1AD05DA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A9F3164-C912-476C-8010-802C1AD05DA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A9F3164-C912-476C-8010-802C1AD05DA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A9F3164-C912-476C-8010-802C1AD05DA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0456096-B90B-4CB8-A574-FD301D114479}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0456096-B90B-4CB8-A574-FD301D114479}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0456096-B90B-4CB8-A574-FD301D114479}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0456096-B90B-4CB8-A574-FD301D114479}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

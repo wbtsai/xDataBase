@@ -1,0 +1,3 @@
+這是給元大新的Library 針對資料庫來做新一代的資料庫處理機制
+Yuanta.xCommon
+Yuanta.xDataBase
