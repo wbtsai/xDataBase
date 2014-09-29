@@ -216,5 +216,10 @@ namespace Yuanta.xDataBase
 
             return list;
         }
+
+        private void RowMapping()
+        { 
+            
+        }
     }
 }
