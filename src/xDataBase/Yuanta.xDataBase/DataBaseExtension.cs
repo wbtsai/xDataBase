@@ -8,16 +8,25 @@ namespace Yuanta.xDataBase
 {
 	public static class DataBaseExtension
 	{
-		public static List<T> ToResultT<T>(this DataTable dt)
+		public static List<T> ToMapping<T>(this DataTable dt)
 		{
 			return MapByRow<T> (dt).ToList ();
 		}
 
-		private static IEnumerable<T> MapByRow<T>(DataTable dt)
+		private static IEnumerable<T> MapByRow<T>(DataTable dt,Func<IMapBuilderContext<T>> RowMapping)
+		{
+			foreach (DataRow row in dt.rows) {
+
+				yield return RowMapping ().MapRow (row);
+			}
+		}
+
+
+		private static IEnumerable<T> MapByRow<T>(DataTable dt,Func<IMapBuilderContext<T>> RowMapping)
 		{
 			foreach (DataRow row in dt.rows) {
 			
-				yield return MappingRow (row);
+				yield return RowMapping ().MapRow (row);
 			}
 		}
 
