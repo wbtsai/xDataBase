@@ -43,8 +43,12 @@
     <Compile Include="DataBase.cs" />
     <Compile Include="MapBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="RowMap\ColumnNameAttribute.cs" />
     <Compile Include="RowMap\PropertyMapping.cs" />
+=======
+    <Compile Include="DataBaseExtension.cs" />
+>>>>>>> Stash
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
