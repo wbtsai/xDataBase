@@ -11,9 +11,9 @@ namespace Yuanta.xDataBase
 {
     public static class MapBuilder<TResult> where TResult:new()
     {
-        public static MapBuilderContext<TResult> MapAll()
+		public static IMapBuilderContext<TResult> Build()
         {
-            MapBuilderContext<TResult> context = new MapBuilderContext<TResult>();
+            IMapBuilderContext<TResult> context = new MapBuilderContext();
 
             var properties =
                 from property in typeof(TResult).GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -37,8 +37,7 @@ namespace Yuanta.xDataBase
 
         private static bool IsCollectionType(Type type)
         {
-            // string implements IEnumerable, but for our purposes we don't consider it a collection.
-            if (type == typeof(string)) return false;
+             if (type == typeof(string)) return false;
 
             var interfaces = from inf in type.GetInterfaces()
                              where inf == typeof(IEnumerable) ||
@@ -47,14 +46,17 @@ namespace Yuanta.xDataBase
             return interfaces.Count() != 0;
         }
         
-        private class MapBuilderContext<TResult>
+		private class MapBuilderContext:IMapBuilderContext<TResult>
         {
-            public Dictionary<PropertyInfo, PropertyMapping> mapping;
+			public Dictionary<PropertyInfo, PropertyMapping> mapping;
+
+			private Func<IMapBuilderContext<TResult>> mapper;
 
             public MapBuilderContext()
             {
                 this.mapping = new Dictionary<PropertyInfo, PropertyMapping>(); 
             }
+
 
 
             internal MapBuilderContext<TResult> Map(PropertyInfo property)
@@ -68,6 +70,16 @@ namespace Yuanta.xDataBase
             {
                 return default(TResult);
             }
+
+			public TResult MapRow (System.Data.DataTable dt)
+			{
+				return default(TResult);
+			}
+
+			public void Map(PropertyInfo info)
+			{
+				mapping.Add (info, new PropertyMapping (info));
+			}
         }
-    }
+	}
 }

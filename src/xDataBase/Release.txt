@@ -1,3 +1,5 @@
-這是給元大新的Library 針對資料庫來做新一代的資料庫處理機制
+這是給元?新?Library 針對資?庫來做新???資?庫處理機?
 Yuanta.xCommon
 Yuanta.xDataBase
+
+Add VersionControl 
