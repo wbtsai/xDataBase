@@ -2,39 +2,29 @@
 using System.Data;
 using System.Collections.Generic;
 using System.Linq;
+using Yuanta.xDataBase.RowMap;
 
 namespace Yuanta.xDataBase
 {
 	public static class DataBaseExtension
-	{
+	{              
+        public static List<T> ToMapping<T>(this DataTable dt)
+		{
+			return MapByRow<T>(dt).ToList();
+		}
 
-        public static TResult ConvertToClass<TResult>(this DataTable dt)
-        {
-            foreach (DataRow row in dt.Rows)
+		private static IEnumerable<T> MapByRow<T>(DataTable dt,Func<MapBuilderContext<T>> mapContext=null)
+		{
+            var context = mapContext();
+
+            if (context == null)
             {
-                yield return MapBuilder<TResult>.MapAll().Build();
+                context = new MapBuilderContext<T>();
             }
-        }
 
-		public static List<T> ToMapping<T>(this DataTable dt)
-		{
-			return MapByRow<T> (dt).ToList ();
-		}
-
-		private static IEnumerable<T> MapByRow<T>(DataTable dt,Func<IMapBuilderContext<T>> RowMapping)
-		{
-			foreach (DataRow row in dt.rows) {
-
-				yield return RowMapping ().MapRow (row);
-			}
-		}
-
-
-		private static IEnumerable<T> MapByRow<T>(DataTable dt,Func<IMapBuilderContext<T>> RowMapping)
-		{
-			foreach (DataRow row in dt.rows) {
+			foreach (DataRow row in dt.Rows) {
 			
-				yield return RowMapping ().MapRow (row);
+				yield return context.MapRow(row);
 			}
 		}
 
