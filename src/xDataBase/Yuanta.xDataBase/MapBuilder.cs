@@ -56,8 +56,18 @@ namespace Yuanta.xDataBase
                 this.mapping = new Dictionary<PropertyInfo, PropertyMapping>(); 
             }
 
-            public 
-            
+
+            internal MapBuilderContext<TResult> Map(PropertyInfo property)
+            {
+                this.mapping.Add(property, new PropertyMapping(property));
+
+                return this;
+            }
+
+            public TResult Build()
+            {
+                return default(TResult);
+            }
         }
     }
 }

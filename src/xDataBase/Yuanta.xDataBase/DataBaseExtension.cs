@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Data;
 
 namespace Yuanta.xDataBase
 {
-	public class DataBaseExtension
+	public static class DataBaseExtension
 	{
-		public DataBaseExtension ()
-		{
-		}
+        public static TResult ConvertToClass<TResult>(this DataTable dt)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                yield return MapBuilder<TResult>.MapAll().Build();
+            }
+        }
 	}
 }
 
