@@ -10,6 +10,10 @@ using System.Text.RegularExpressions;
 
 namespace Yuanta.xDataBase
 {
+    /// <summary>
+    /// ToDo:
+    /// 1. StoreProcedure must have return parameter
+    /// </summary>
     public class DataBase
     {
         private string Name { get; set; }

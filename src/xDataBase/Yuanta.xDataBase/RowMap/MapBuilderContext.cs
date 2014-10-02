@@ -74,6 +74,19 @@ namespace Yuanta.xDataBase.RowMap
             
         }
 
+        //private void ReflectionRowMapper2()
+        //{
+        //    if (propertyMapping == null) throw new ArgumentNullException("propertyMappings");
+
+        //    this.mapper = (dr) => { 
+                    
+        //        return Activator.CreateInstance<TResult>()
+        //    };
+
+           
+
+        //}
+
         public MethodInfo GetMethodInfo<T>(Expression<Action<T>> expression)
         {
             return GetMethodInfo((LambdaExpression)expression);

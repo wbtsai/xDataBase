@@ -5,6 +5,8 @@ using System.Text;
 using System.Reflection;
 using System.Data;
 using Yuanta.xDataBase.RowMap;
+using System.ComponentModel;
+using System.Globalization;
 
 namespace Yuanta.xDataBase.RowMap
 {
@@ -31,19 +33,59 @@ namespace Yuanta.xDataBase.RowMap
 
         public object GetPropertyValue(DataRow row)
         {
-            return row[this.Name];
+            if (row == null) throw new ArgumentNullException("row");
+
+            object value;
+            
+            value = row[this.Name];
+           
+            object convertedValue;
+            
+            convertedValue = ConvertValue(value, Property.PropertyType);
+            
+            return convertedValue;
         }
 
-        public void Map(object instance, DataRow row)
+        private object ConvertValue(object value, Type conversionType)
         {
-            object convertedValue = GetPropertyValue(row);
-
-            SetValue(instance, convertedValue);
+            if (IsNullableType(conversionType))
+            {
+                return ConvertNullableValue(value, conversionType);
+            }
+            return ConvertNonNullableValue(value, conversionType);
         }
 
-        protected void SetValue(object instance, object value)
+        private  bool IsNullableType(Type t)
         {
-            Property.SetValue(instance, value, new object[0]);
+            return t.IsGenericType &&
+                   t.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
+
+        private object ConvertNullableValue(object value, Type conversionType)
+        {
+            if (value != DBNull.Value)
+            {
+                var converter = new NullableConverter(conversionType);
+                return converter.ConvertFrom(value);
+            }
+            return null;
+        }
+                
+        protected static object ConvertNonNullableValue(object value, Type conversionType)
+        {
+            object convertedValue = null;
+
+            if (value != DBNull.Value)
+            {
+                convertedValue = Convert.ChangeType(value, conversionType, CultureInfo.CurrentCulture);
+            }
+            else if (conversionType.IsValueType)
+            {
+                convertedValue = Activator.CreateInstance(conversionType);
+            }
+
+            return convertedValue;
+        }
+
     }
 }
