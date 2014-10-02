@@ -13,15 +13,10 @@ namespace Yuanta.xDataBase
 			return MapByRow<T>(dt).ToList();
 		}
 
-		private static IEnumerable<T> MapByRow<T>(DataTable dt,Func<MapBuilderContext<T>> mapContext=null)
+		private static IEnumerable<T> MapByRow<T>(DataTable dt)
 		{
-            var context = mapContext();
-
-            if (context == null)
-            {
-                context = new MapBuilderContext<T>();
-            }
-
+            var context = new MapBuilderContext<T>();
+            
 			foreach (DataRow row in dt.Rows) {
 			
 				yield return context.MapRow(row);

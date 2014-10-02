@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using Yuanta.xDataBase;
+using Yuanta.xDataBase.RowMap;
 
 namespace TestPP
 {
@@ -15,7 +16,7 @@ namespace TestPP
         static void Main(string[] args)
         {
             Test1();
-            Test2();
+            //Test2();
         }
 
         static void Test1()
@@ -24,15 +25,17 @@ namespace TestPP
 
             DataTable dt=db.DoQuery(() =>
             {
-                return "select * from feclient where feclientidno=:idno";
+                return "select feclientidno,feclientname from feclient where feclientidno=:idno";
             }, dic => 
             {
                 dic.Add("idno", "L120678791");
             });
 
-            foreach (DataRow row in dt.Rows)
+            List<TestClass> list = dt.ToMapping<TestClass>();
+            
+            foreach (TestClass c in list)
             {
-                string aa = row["feclientidno"].ToString();
+                string aa =c.ID;
             }
         }
 
@@ -57,5 +60,13 @@ namespace TestPP
                 });
             });
         }
+    }
+
+    public class TestClass
+    {
+        [ColumnName(ColumnName="feclientidno")]
+        public string ID { get; set; }
+       [ColumnName(ColumnName = "feclientname")]
+        public string Name { get; set; }
     }
 }
