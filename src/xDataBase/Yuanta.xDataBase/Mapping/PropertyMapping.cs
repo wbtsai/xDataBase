@@ -71,7 +71,7 @@ namespace Yuanta.xDataBase.Mapping
             return null;
         }
                 
-        protected static object ConvertNonNullableValue(object value, Type conversionType)
+        private static object ConvertNonNullableValue(object value, Type conversionType)
         {
             object convertedValue = null;
 

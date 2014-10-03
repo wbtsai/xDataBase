@@ -17,7 +17,8 @@ namespace TestPP
         {
             //Test1();
             //Test2();
-            Test3();
+            //Test3();
+            Test4();
         }
 
         private static void Test3()
@@ -81,6 +82,21 @@ namespace TestPP
                 {
                     dic.Add("pId", "09361410");
                     dic.Add("pName", "取號測試");
+                });
+            });
+        }
+
+        static void Test4()
+        {
+            //做一個更新的Case
+            DataBase db = new DataBase("SBK");
+
+            db.DoTransaction(false, () =>
+            {
+                //更新資料
+                db.DoCommand(() =>
+                {
+                    return @"grant select on tmp_feclienttrade_0922 to ibt";
                 });
             });
         }

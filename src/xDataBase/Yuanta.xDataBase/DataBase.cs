@@ -57,17 +57,21 @@ namespace Yuanta.xDataBase
         {
             return this.Connection.CreateCommand();
         }
+               
 
-        private DbCommand CreateCommand(string sql,CommandType cmdType,Action<Dictionary<string, object>> parameterList)
+        private DbCommand CreateCommand(string sql,CommandType cmdType,Action<Dictionary<string, object>> parameterList=null)
         {
             Dictionary<string, object> dic = new Dictionary<string, object>();
 
             DbCommand cmd = CreateCommand();
 
             cmd.CommandText = sql;
-
-            parameterList(dic);
-
+            
+            if(parameterList!=null)
+            {
+                parameterList(dic);     
+            }
+            
             List<string> pList = GetParameterList(sql, this.ParameterToken);
 
             if (pList.Count > 0)
@@ -148,17 +152,17 @@ namespace Yuanta.xDataBase
             return dt;
         }
 
-        public int DoCommand(Func<string> sqlStatement,Action<Dictionary<string, object>> AddParamters)
+        public int DoCommand(Func<string> sqlStatement,Action<Dictionary<string, object>> AddParamters=null)
         {
            return DoCommand(sqlStatement, CommandType.Text,AddParamters);
         }
 
-        public int DoSPCommand(Func<string> sqlStatement,Action<Dictionary<string, object>> AddParamters)
+        public int DoSPCommand(Func<string> sqlStatement,Action<Dictionary<string, object>> AddParamters=null)
         {
            return DoCommand(sqlStatement, CommandType.StoredProcedure,AddParamters);
         }
 
-        public int DoCommand(Func<string> sqlStatement, CommandType commandType, Action<Dictionary<string, object>> AddParamters)
+        public int DoCommand(Func<string> sqlStatement, CommandType commandType, Action<Dictionary<string, object>> AddParamters=null)
         {
             DbCommand cmd;
 
