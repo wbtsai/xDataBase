@@ -17,7 +17,7 @@ namespace Yuanta.xDataBase.Mapping
             this.Property = propertyInfo;
             //確定是否有設ColumnName
             ColumnNameAttribute[] attrs = (ColumnNameAttribute[])this.Property.GetCustomAttributes(typeof(ColumnNameAttribute));
-            if (attrs == null)
+            if (attrs.Length==0)
             {
                 this.Name = this.Property.Name;
             }
