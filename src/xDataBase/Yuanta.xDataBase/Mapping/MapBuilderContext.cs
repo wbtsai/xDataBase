@@ -7,7 +7,7 @@ using System.Data;
 using System.Collections;
 using System.Linq.Expressions;
 
-namespace Yuanta.xDataBase.RowMap
+namespace Yuanta.xDataBase.Mapping
 {
     public class MapBuilderContext<TResult>
     {
@@ -73,21 +73,9 @@ namespace Yuanta.xDataBase.RowMap
                 this.mapper = lambda.Compile();
             
         }
+                
 
-        //private void ReflectionRowMapper2()
-        //{
-        //    if (propertyMapping == null) throw new ArgumentNullException("propertyMappings");
-
-        //    this.mapper = (dr) => { 
-                    
-        //        return Activator.CreateInstance<TResult>()
-        //    };
-
-           
-
-        //}
-
-        public MethodInfo GetMethodInfo<T>(Expression<Action<T>> expression)
+        private MethodInfo GetMethodInfo<T>(Expression<Action<T>> expression)
         {
             return GetMethodInfo((LambdaExpression)expression);
         }
@@ -101,6 +89,14 @@ namespace Yuanta.xDataBase.RowMap
         public TResult MapRow(DataRow row)
         {
             return mapper(row);
+        }
+
+        public void GetPameters(Dictionary<string,object> dic, TResult obj)
+        {
+            foreach (PropertyMapping p in propertyMapping.Values)
+            {
+                dic.Add(p.Name, p.Property.GetValue(obj));
+            }
         }
     }
 }

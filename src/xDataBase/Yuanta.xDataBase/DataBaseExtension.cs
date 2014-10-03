@@ -2,7 +2,7 @@
 using System.Data;
 using System.Collections.Generic;
 using System.Linq;
-using Yuanta.xDataBase.RowMap;
+using Yuanta.xDataBase.Mapping;
 
 namespace Yuanta.xDataBase
 {
@@ -22,6 +22,13 @@ namespace Yuanta.xDataBase
 				yield return context.MapRow(row);
 			}
 		}
+
+        public static void ToMappingParameter<T>(this Dictionary<string, object> dic, T obj)
+        {
+            var context = new MapBuilderContext<T>();
+
+            context.GetPameters(dic, obj);
+        }
 
 	}
 }

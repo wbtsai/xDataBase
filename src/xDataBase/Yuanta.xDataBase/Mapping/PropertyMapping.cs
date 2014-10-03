@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 using System.Data;
-using Yuanta.xDataBase.RowMap;
+using Yuanta.xDataBase.Mapping;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Yuanta.xDataBase.RowMap
+namespace Yuanta.xDataBase.Mapping
 {
     public class PropertyMapping
     {

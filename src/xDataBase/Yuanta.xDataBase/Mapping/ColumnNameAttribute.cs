@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Yuanta.xDataBase.RowMap
+namespace Yuanta.xDataBase.Mapping
 {
     [AttributeUsage(AttributeTargets.Property,AllowMultiple=false)]
     public class ColumnNameAttribute:Attribute
