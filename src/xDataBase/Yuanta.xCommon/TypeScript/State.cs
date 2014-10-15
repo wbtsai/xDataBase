@@ -10,7 +10,7 @@ namespace Yuanta.xCommon.TypeScript
     {
         public string Source { get; set; }
         public int Position { get; set; }
-        public U UserSatate { get; set; }
+        public U UserState { get; set; }
 
         public State(string source,int position,U userState)
         {
@@ -21,7 +21,7 @@ namespace Yuanta.xCommon.TypeScript
 
             this.Source = source;
             this.Position = position;
-            this.UserSatate = userState;
+            this.UserState = userState;
         }
 
         public int[] GetRowColumn() {
@@ -40,6 +40,16 @@ namespace Yuanta.xCommon.TypeScript
 
             var column = this.Position - position;
             return new int[]{raw,column};
+        }
+        
+        public State<U> Seek(int delta)
+        {
+            return new State<U>(this.Source, this.Position + delta, this.UserState);
+        }
+
+        public bool Equals(State<U> src)
+        { 
+            return this.Source == src.Source && this.Position == src.Position && this.UserState.Equals(src.UserState);
         }
     }
 }
