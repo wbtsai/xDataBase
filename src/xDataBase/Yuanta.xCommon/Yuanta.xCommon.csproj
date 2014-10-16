@@ -42,6 +42,9 @@
     <Compile Include="Functional\PatternMatch.cs" />
     <Compile Include="Functional\Pipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TypeScript\Parse.cs" />
+    <Compile Include="TypeScript\Parser.cs" />
+    <Compile Include="TypeScript\Reply.cs" />
     <Compile Include="TypeScript\State.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

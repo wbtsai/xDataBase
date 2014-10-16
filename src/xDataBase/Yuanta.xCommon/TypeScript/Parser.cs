@@ -8,6 +8,13 @@ namespace Yuanta.xCommon.TypeScript
 {
     public class Parser
     {
+
+
+        public Parser()
+        { 
+        
+        }
+
         public State<U> State<U>(string source, U userState, int position = 0)
         {
             return new State<U>(source, position, userState);
@@ -22,5 +29,14 @@ namespace Yuanta.xCommon.TypeScript
         {
             return new Reply<A, U>(state, false, default(A), expected);
         }
+    }
+
+    public class Parser<A,U>
+    {
+        public Parser(Func<State<U>, Reply<A, U>> runparser)
+        {
+            this.RunParser = runparser;
+        }
+        public Func<State<U>, Reply<A, U>> RunParser{ get; set; }
     }
 }
