@@ -8,9 +8,9 @@ namespace Yuanta.xCommon.TypeScript
 {
     public class Parser
     {
-        public Reply<A,U> Parse<A,U>(Parser<A,U> parser,State<U> state )
+        public Reply<A,U> Parse<A,U>(Parser<A> parser,State<U> state )
         {
-            return parser.RunParser(state);
+            return parser.RunParser<U>(state);
         }
 
         public Parser<A, U> Choice<A,U>(List<Parser<A, U>> ps)
@@ -55,13 +55,28 @@ namespace Yuanta.xCommon.TypeScript
         }
     }
 
-    public class Parser<A,U>
+    public class Parser<A>
     {
-       public Func<State<U>, Reply<A, U>> RunParser{get;set;}
-       public Parser(Func<State<U>, Reply<A, U>> runparser)
-        {
-            this.RunParser = runparser;
-        }
-       
+        
+       public Reply<A, U> Parse<U>(Func<State<U>, Reply<A, U>> parser,State<U> state)
+       {
+           return parser(state);
+       }
+
+       public void Init<U>(Func<State<U>, Reply<A, U>> runParser)
+       {
+           var parser = new Parser<A, U>(runParser);
+       }
+
+       private class Parser<A, U>
+       {
+           public Func<State<U>, Reply<A, U>> RunParser { get; set; }
+
+           public Parser(Func<State<U>, Reply<A, U>> runParser)
+           {
+               this.RunParser = runParser;
+           }
+       }
     }
+
 }
