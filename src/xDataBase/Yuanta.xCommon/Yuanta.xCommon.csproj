@@ -43,8 +43,9 @@
     <Compile Include="Functional\Pipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeScript\Combinator.cs" />
-    <Compile Include="TypeScript\IContext.cs" />
+    <Compile Include="TypeScript\Context.cs" />
     <Compile Include="TypeScript\Parser.cs" />
+    <Compile Include="TypeScript\ParserCT.cs" />
     <Compile Include="TypeScript\Reply.cs" />
     <Compile Include="TypeScript\State.cs" />
   </ItemGroup>

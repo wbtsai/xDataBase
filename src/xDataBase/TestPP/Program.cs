@@ -18,7 +18,51 @@ namespace TestPP
             //Test1();
             //Test2();
             //Test3();
-            Test4();
+            //Test4();
+
+            //Test ParserCT
+            
+            Test5();
+
+            
+        }
+
+        private static void Test5()
+        {
+            
+        }
+
+        private static Parser<string> satisfy(Func<string, int, bool> condition)
+        { 
+            Func<string[]> expectedChars=()=>{
+                var cs=new List<string>();
+                for(var i=32;i<=126;i++)
+                {
+                    var c=char(i);
+                    if(condition(c,i))
+                    {
+                        cs.Add(c);
+                    }
+                }
+                return cs.ToArray();
+            };
+
+            Func<State,Reply<string>> satisfyParser=s=>{
+                if(s.Position<s.Source.Length)
+                {
+                    var c=s.Source[s.Position];
+                    var i=(int)s.Source[s.Position];
+                }
+
+                return new Reply<string>(new State("HH",0,null),true,"2",()=>{return "OK";});
+            };
+
+            return new Parser<string>(satisfyParser);
+        }
+
+        private Reply<A> Parse<A>(Parser<A> parser,State s)
+        {
+            return parser(s);
         }
 
         private static void Test3()

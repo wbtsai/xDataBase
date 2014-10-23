@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Yuanta.xCommon.TypeScript
 {
-    public interface IContext<T>
+    public class Context<T>
     {
-        bool success { get; set; }
+        public bool success { get; set; }
 
-        object UserState { get; set; }
+        public object UserState { get; set; }
 
-        T ParseTo(Parser<T> parser);
+        //T ParseTo(Parser<T> parser);
     }
 }
