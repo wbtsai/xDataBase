@@ -160,18 +160,27 @@ namespace Yuanta.xCommon.TypeScript
             return new Parser<T>(headParser);
         }
 
-        public static Parser<T> Seq<T>(Func<Context<T>,)
+        public static Parser<T> Seq<T>(Func<Context<T>,T> f)
         {
-            Func<State, Reply<T>> headParser = (state) =>
+            Func<State, Reply<T>> seqParser = (state) =>
             {
 
-                var st = Parse<T>(p, state);
-                var Value = st.Value;
-                for (var i = 0; i < ps.Length && st.Success; i++)
-                {
-                    st = Parse<T>(ps[i], st.State);
-                }
-                return st.Success ? OK<T>(st.State, Value) : st;
+               var st = OK<T>(state, default(T));
+            
+                Func<Parser<T>,T> contextFunction=p=> {
+                    if(st.Success)
+                    {
+                        st =Parse<T>(p, st.State);
+                        context.success = st.success;
+                        return st.value; 
+                    }                
+                };
+            var context: Context<U> = <Context<U>> contextFunction;
+            context.success = true;
+            context.userState = st.state._userState;
+            var value: A = f(context);
+            st.state._userState = context.userState;
+            return context.success ? ok(st.state, value) : st;
             };
 
             return new Parser<T>(headParser);
